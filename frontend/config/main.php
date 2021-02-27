@@ -36,6 +36,16 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+//        'urlManager' => [
+//            'class' => 'codemix\localeurls\UrlManager',
+//            'enableDefaultLanguageUrlCode' => true,
+//            'enableLanguagePersistence' => false,
+//            //'languages' => ['uz', 'ru'/*, 'en'*/],
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'enableLanguageDetection' => false,
+//
+//        ]
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
