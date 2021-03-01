@@ -4,6 +4,9 @@ namespace common\models;
 
 use common\helpers\DebugHelper;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\UploadedFile;
 
 /**
@@ -21,10 +24,26 @@ use yii\web\UploadedFile;
  * @property string|null $imageHelper
  *
  */
-class Project extends \yii\db\ActiveRecord
+class Project extends ActiveRecord
 {
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false,
+                'value' => new Expression('CAST(NOW() as DATE)'),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['created_at'],
+                ]
+            ],
+        ];
+    }
+
     public $helpImage;
+
     /**
      * {@inheritdoc}
      */
@@ -39,7 +58,8 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'image', 'created_at', 'user_id'], 'required'],
+            [['title', 'description', 'image', 'created_at',
+                'user_id'], 'required'],
             [['created_at', 'date'], 'safe'],
             [['user_id'], 'integer'],
             [['title', 'description', 'link', 'image'], 'string', 'max' => 255],
