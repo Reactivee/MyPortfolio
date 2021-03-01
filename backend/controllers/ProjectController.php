@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\helpers\DebugHelper;
 use Yii;
 use common\models\Project;
 use common\models\ProjectSearch;
+use yii\debug\models\search\Debug;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,8 +68,16 @@ class ProjectController extends Controller
     {
         $model = new Project();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->user_id = Yii::$app->user->id;
+            $model->created_at = date('Y-m-d');
+            $model->uploadImage();
+                //DebugHelper::printSingleObject($model->attributes   , 1);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                DebugHelper::printSingleObject($model->errors, 1);
+            }
         }
 
         return $this->render('create', [

@@ -2,7 +2,9 @@
 
 namespace common\models;
 
+use common\helpers\DebugHelper;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "project".
@@ -15,9 +17,14 @@ use Yii;
  * @property string $created_at
  * @property string|null $date
  * @property int $user_id
+ *
+ * @property string|null $imageHelper
+ *
  */
 class Project extends \yii\db\ActiveRecord
 {
+
+    public $helpImage;
     /**
      * {@inheritdoc}
      */
@@ -54,5 +61,45 @@ class Project extends \yii\db\ActiveRecord
             'date' => 'Date',
             'user_id' => 'User ID',
         ];
+    }
+
+    public function uploadImage()
+    {
+        $image = UploadedFile::getInstance($this, 'helpImage');
+        //DebugHelper::printSingleObject($image, 1);
+        if ($image) {
+            if (!$this->isNewRecord) {
+                if (!empty($this->image)) {
+                    $oldImage = self::uploadImagePath() . $this->image;
+                    if (file_exists($oldImage)) {
+                        unlink($oldImage);
+                    }
+                }
+            }
+            $imageName = self::createGuid() . '_' . '.' . $image->getExtension();
+            $this->image = $imageName;
+            $imagePath = self::uploadImagePath() . $imageName;
+            $image->saveAs($imagePath);
+        }
+    }
+
+    public static function uploadImagePath()
+    {
+        return Yii::getAlias('@frontend') . '/web/uploads/';
+    }
+
+    public static function createGuid()
+    {
+        $guid = '';
+        $uid = uniqid("", true);
+        $data = $_SERVER['REQUEST_TIME'];
+        $data .= $_SERVER['HTTP_USER_AGENT'];
+        $hash = hash('ripemd128', $uid . $guid . md5($data));
+        $guid = substr($hash, 0, 8) .
+            '-' . substr($hash, 8, 4) .
+            '-' . substr($hash, 12, 4) .
+            '-' . substr($hash, 16, 4) .
+            '-' . substr($hash, 20, 12);
+        return $guid;
     }
 }
