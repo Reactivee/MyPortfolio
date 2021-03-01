@@ -35,8 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'link',
             [
                 'attribute' => 'image',
-                'value' => Html::img('http://front.port/uploads/' . $model->image),
-                'format' => 'raw'
+                'value' => Html::img('http://front.port/uploads/' . $model->image,[
+                        'class'=>'img-responsive'
+                ] ),
+                'format' => 'raw',
             ],
             'created_at',
             'date',
