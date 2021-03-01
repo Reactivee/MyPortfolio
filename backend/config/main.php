@@ -37,32 +37,25 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-//        'urlManager' => [
-//            'class' => 'codemix\localeurls\UrlManager',
-//            'enableDefaultLanguageUrlCode' => true,
-//            'enableLanguagePersistence' => false,
-//            //'languages' => ['uz', 'ru'/*, 'en'*/],
-//            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-//            'enableLanguageDetection' => false,
-//            'rules' => [
-//                '' => '/site/index',
-//                'l/<id:\d+>' => 'site/list',
-//                'g/<id:\d+>' => 'site/gallery',
-//                'v/<id:\d+>' => 'site/view',
-//                'r/<id:\d+>' => 'site/region',
-//                'p/<id:\d+>' => 'site/partner',
-//                '<controller>/<action>/<id:\d+>' => '<controller>/<action>'
-//            ]
-//        ]
-        /*
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+            'enableDefaultLanguageUrlCode' => true,
+            'enableLanguagePersistence' => false,
+            //'languages' => ['uz', 'ru'/*, 'en'*/],
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableLanguageDetection' => false,
             'rules' => [
-            ],
-        ],
-        */
+                '' => '/site/index',
+                'l/<id:\d+>' => 'site/list',
+                'g/<id:\d+>' => 'site/gallery',
+                'v/<id:\d+>' => 'site/view',
+                'r/<id:\d+>' => 'site/region',
+                'p/<id:\d+>' => 'site/partner',
+                '<controller>/<action>/<id:\d+>' => '<controller>/<action>'
+            ]
+        ]
+
     ],
     'params' => $params,
 ];
