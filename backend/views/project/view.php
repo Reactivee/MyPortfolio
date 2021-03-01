@@ -33,7 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description',
             'link',
-            'image',
+            [
+                'attribute' => 'image',
+                'value' => Html::img('http://front.port/uploads/' . $model->image),
+                'format' => 'raw'
+            ],
             'created_at',
             'date',
             'user_id',
