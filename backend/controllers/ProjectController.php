@@ -69,7 +69,7 @@ class ProjectController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->user_id = Yii::$app->user->id;
+            //$model->user_id = Yii::$app->user->id;
             $model->uploadImage();
 
             if ($model->save()) {

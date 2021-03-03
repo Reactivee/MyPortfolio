@@ -4,7 +4,7 @@ namespace common\models;
 
 use common\helpers\DebugHelper;
 use Yii;
-use yii\behaviors\TimestampBehavior;
+use common\components\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\UploadedFile;
@@ -36,10 +36,9 @@ class Project extends ActiveRecord
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => false,
-                'value' => new Expression('CAST(NOW() as DATE)'),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['created_at'],
-                ]
+                'creatorIdAttribute' => 'user_id',
+                'modifierIdAttribute' => false,
+                'timestamp' => true
             ],
         ];
     }
