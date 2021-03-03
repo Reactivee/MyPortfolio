@@ -27,20 +27,20 @@ use yii\web\UploadedFile;
 class Project extends ActiveRecord
 {
 
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::class,
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => false,
-                'value' => new Expression('CAST(NOW() as DATE)'),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['created_at'],
-                ]
-            ],
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            [
+//                'class' => TimestampBehavior::class,
+//                'createdAtAttribute' => 'created_at',
+//                'updatedAtAttribute' => false,
+//                'value' => new Expression('CAST(NOW() as DATE)'),
+//                'attributes' => [
+//                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['created_at'],
+//                ]
+//            ],
+//        ];
+//    }
 
     public $helpImage;
 
@@ -108,6 +108,7 @@ class Project extends ActiveRecord
         return Yii::getAlias('@frontend') . '/web/uploads/';
     }
 
+//Question
     public static function createGuid()
     {
         $guid = '';

@@ -32,7 +32,7 @@ use kartik\date\DatePicker;
         ])
     ?>
 
-    <?//= $form->field($model, 'created_at')->textInput() ?>
+<!--    --><?//= $form->field($model, 'created_at')->textInput() ?>
 
     <?= $form->field($model, 'date')
         ->widget(DatePicker::class, [
