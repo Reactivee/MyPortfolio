@@ -38,7 +38,6 @@ class ProjectController extends Controller
     {
         $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -67,10 +66,12 @@ class ProjectController extends Controller
     {
         $model = new Project();
 
+
         if ($model->load(Yii::$app->request->post())) {
+
             $model->user_id = Yii::$app->user->id;
             $model->uploadImage();
-                //DebugHelper::printSingleObject($model->attributes   , 1);
+
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
@@ -93,9 +94,15 @@ class ProjectController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+//        DebugHelper::printSingleObject($model, 1);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->uploadImage();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                DebugHelper::printSingleObject($model->errors, 1);
+            }
         }
 
         return $this->render('update', [

@@ -20,19 +20,50 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'helpImage')
-        ->widget(\kartik\file\FileInput::class, [
-            'options' => [
-                'accept' => 'image/*'
-            ],
-            'pluginOptions' => [
-                'showRemove' => true,
-                'showUpload' => false
-            ]
-        ])
+    <? if ($model->image) {
+        echo $form->field($model, 'helpImage')
+            ->widget(\kartik\file\FileInput::class, [
+                'options' => [
+                    'accept' => 'image/*',
+                    'initialPreview' => Html::img('http://front.port/uploads/' . $model->image, [
+                        'class' => 'img-responsive'
+                    ]),
+                ],
+                'pluginOptions' => [
+                    'initialPreview' => [
+                        'http://front.port/uploads/' . $model->image,
+                    ],
+                    'initialPreviewAsData' => true,
+                    'initialCaption' => $model->image,
+
+                    'overwriteInitial' => true,
+                ]
+            ]);
+
+    }
+    else{
+
+       echo $form->field($model, 'helpImage')
+            ->widget(\kartik\file\FileInput::class, [
+                'options' => [
+                    'accept' => 'image/*',
+
+                ],
+                'pluginOptions' => [
+//                    'showPreview' => false,
+                    'showCaption' => true,
+                    'showRemove' => true,
+                    'showUpload' => false
+                ]
+            ]);
+    }
+
+
+
     ?>
 
-<!--    --><?//= $form->field($model, 'created_at')->textInput() ?>
+
+    <!--    --><? //= $form->field($model, 'created_at')->textInput() ?>
 
     <?= $form->field($model, 'date')
         ->widget(DatePicker::class, [
@@ -40,7 +71,7 @@ use kartik\date\DatePicker;
             'pluginOptions' => [
                 'format' => 'yyyy-mm-dd',
                 'todayHighlight' => true,
-                'autoclose'=>true
+                'autoclose' => true
             ]
         ])
     ?>

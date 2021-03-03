@@ -27,21 +27,23 @@ use yii\web\UploadedFile;
 class Project extends ActiveRecord
 {
 
-//    public function behaviors()
-//    {
-//        return [
-//            [
-//                'class' => TimestampBehavior::class,
-//                'createdAtAttribute' => 'created_at',
-//                'updatedAtAttribute' => false,
-//                'value' => new Expression('CAST(NOW() as DATE)'),
-//                'attributes' => [
-//                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['created_at'],
-//                ]
-//            ],
-//        ];
-//    }
 
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false,
+                'value' => new Expression('CAST(NOW() as DATE)'),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['created_at'],
+                ]
+            ],
+        ];
+    }
+    public $imagePath;
     public $helpImage;
 
     /**
@@ -62,7 +64,7 @@ class Project extends ActiveRecord
                 'user_id'], 'required'],
             [['created_at', 'date'], 'safe'],
             [['user_id'], 'integer'],
-            [['title', 'description', 'link', 'image'], 'string', 'max' => 255],
+            [['title', 'description', 'link', 'image','imagePath'], 'string', 'max' => 255],
         ];
     }
 
@@ -86,20 +88,22 @@ class Project extends ActiveRecord
     public function uploadImage()
     {
         $image = UploadedFile::getInstance($this, 'helpImage');
-        //DebugHelper::printSingleObject($image, 1);
         if ($image) {
             if (!$this->isNewRecord) {
                 if (!empty($this->image)) {
                     $oldImage = self::uploadImagePath() . $this->image;
+//                    DebugHelper::printSingleObject($oldImage,  1);
                     if (file_exists($oldImage)) {
                         unlink($oldImage);
                     }
                 }
             }
+
+
             $imageName = self::createGuid() . '_' . '.' . $image->getExtension();
             $this->image = $imageName;
-            $imagePath = self::uploadImagePath() . $imageName;
-            $image->saveAs($imagePath);
+            $this->imagePath = self::uploadImagePath() . $imageName;
+            $image->saveAs($this->imagePath);
         }
     }
 
