@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\helpers\DebugHelper;
+use common\widgets\Alert;
 use Yii;
 use common\models\Project;
 use common\models\ProjectSearch;
@@ -121,6 +122,12 @@ class ProjectController extends Controller
     {
         $this->findModel($id)->delete();
 
+        echo Alert::widget([
+            'options' => [
+                'class' => 'alert-info',
+            ],
+            'body' => 'Say hello...',
+        ]);
         return $this->redirect(['index']);
     }
 

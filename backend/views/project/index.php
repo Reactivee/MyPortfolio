@@ -32,9 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'link',
             'image',
             'created_at',
+            'update_at',
             'date',
-            'user_id',
-
+            'user.username',
+            'category',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

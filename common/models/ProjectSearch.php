@@ -12,13 +12,18 @@ use common\models\Project;
 class ProjectSearch extends Project
 {
     /**
+     * @var mixed|null
+     */
+
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
-            [['title', 'description', 'link', 'image', 'created_at', 'date'], 'safe'],
+            [['id', 'user_id','category_id'], 'integer'],
+            [['title', 'description', 'link', 'image', 'created_at', 'date','update_at'], 'safe'],
         ];
     }
 
@@ -59,8 +64,10 @@ class ProjectSearch extends Project
         $query->andFilterWhere([
             'id' => $this->id,
             'created_at' => $this->created_at,
+            'update_at' => $this->update_at,
             'date' => $this->date,
             'user_id' => $this->user_id,
+            'category_at' => $this->category_id ,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

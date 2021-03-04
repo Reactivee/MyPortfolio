@@ -20,6 +20,7 @@ use yii\web\UploadedFile;
  * @property string $created_at
  * @property string|null $date
  * @property int $user_id
+ * @property int $category_id
  *
  * @property string|null $imageHelper
  *
@@ -35,7 +36,7 @@ class Project extends ActiveRecord
             [
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => false,
+                'updatedAtAttribute' => 'update_at',
                 'creatorIdAttribute' => 'user_id',
                 'modifierIdAttribute' => false,
                 'timestamp' => true
@@ -59,11 +60,10 @@ class Project extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'image', 'created_at',
-                'user_id'], 'required'],
-            [['created_at', 'date'], 'safe'],
-            [['user_id'], 'integer'],
-            [['title', 'description', 'link', 'image','imagePath'], 'string', 'max' => 255],
+            [['title', 'category_id', 'user_id'], 'required'],
+            [['created_at', 'date', 'update_at'], 'safe'],
+            [['user_id', 'category_id'], 'integer'],
+            [['title', 'description', 'link', 'image', 'imagePath'], 'string', 'max' => 255],
         ];
     }
 
@@ -79,8 +79,10 @@ class Project extends ActiveRecord
             'link' => 'Link',
             'image' => 'Image',
             'created_at' => 'Created At',
+            'update_at' => 'Update At',
             'date' => 'Date',
             'user_id' => 'User ID',
+            'category_id' => 'Category Id',
         ];
     }
 
@@ -126,4 +128,28 @@ class Project extends ActiveRecord
             '-' . substr($hash, 20, 12);
         return $guid;
     }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public static function getCategories()
+    {
+        return [
+            1 => 'Landing Page',
+            2 => 'E Commerce',
+            3 => 'HTML Template',
+            4 => 'Visit site',
+            5 => 'CMS Site',
+            6 => 'Browser App',
+            7 => 'Multimedia template',
+        ];
+    }
+
+    public function getCategory()
+    {
+        return self::getCategories()[$this->category_id];
+    }
+
 }
