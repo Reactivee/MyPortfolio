@@ -1,7 +1,8 @@
 <?php
+
 namespace frontend\controllers;
 
-use common\helpers\DebugHelper;
+use common\models\Feedback;
 use common\models\Project;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -76,20 +77,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $userHost = Yii::$app->request->userHost;
-        $userIP = Yii::$app->request->userIP;
-        $session = Yii::$app->session;
-        $projects = Project::find()->asArray()->all();
-        $allCategories=Project::getCategories();
         return $this->render('index', [
-            'projects'=>$projects,
-            'allCategories'=>$allCategories,
-            'userHost'=>$userHost,
-            'userIp'=>$userIP,
-            'session '=>$session
-
+            'projects' => Project::find()->asArray()->all(),
+            'allCategories' => Project::getCategories(),
+            'feedback' => new Feedback()
         ]);
-
     }
 
     /**

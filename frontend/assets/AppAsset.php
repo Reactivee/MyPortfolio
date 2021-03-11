@@ -24,7 +24,7 @@ class AppAsset extends AssetBundle
         "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css",
     ];
     public $js = [
-        "vendor/jquery/jquery.min.js",
+        //"vendor/jquery/jquery.min.js",
         "vendor/bootstrap/js/bootstrap.bundle.min.js",
         "vendor/jquery.cookie/jquery.cookie.js",
         "vendor/owl.carousel/owl.carousel.min.js",
@@ -35,6 +35,7 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+//        'yii\bootstrap\BootstrapAsset',
+//        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

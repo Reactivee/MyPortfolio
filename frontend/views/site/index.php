@@ -1,11 +1,12 @@
 <?php
 
+use yii\bootstrap\Html;
+use yii\widgets\ActiveForm;
+
 /**
  * @var $projects
  * @var $allCategories
- * @var $userHost
- * @var  $userIp
- * @var $session
+ * @var $feedback \common\models\Feedback
  */
 ?>
 
@@ -126,35 +127,55 @@
         </header>
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <form id="contact-form" method="post" action="">
-                    <div class="messages"></div>
-                    <div class="controls">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="name" placeholder="Your firstname *" required="required"
-                                       class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="surname" placeholder="Your lastname *" required="required"
-                                       class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="email" placeholder="Your email *" required="required"
-                                       class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="phone" placeholder="Your phone" class="form-control">
-                            </div>
-                            <div class="col-md-12">
-                                <textarea name="message" placeholder="Message for me *" rows="4" required="required"
-                                          class="form-control"></textarea>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-outline-primary">Send message</button>
-                            </div>
+
+                <?
+                $form = ActiveForm::begin([
+                    'id' => 'contact-form',
+                    'action' => ['site/feedback']
+                ]); ?>
+                <div class="messages"></div>
+                <div class="controls">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <?= $form->field($feedback, 'first_name')
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('first_name') . ' *'])
+                                ->label(false);
+                            ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= $form->field($feedback, 'last_name')
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('last_name') . ' *'])
+                                ->label(false);
+                            ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= $form->field($feedback, 'email')
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('email') . ' *'])
+                                ->label(false);
+                            ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= $form->field($feedback, 'phone')
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('phone')])
+                                ->label(false);
+                            ?>
+                        </div>
+                        <div class="col-md-12">
+                            <?= $form->field($feedback, 'message')
+                                ->textarea(['placeholder' => $feedback->getAttributeLabel('message') . ' *', 'rows' => 4])
+                                ->label(false);
+                            ?>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <?= Html::submitButton('Send message', ['class' => 'btn btn-outline-primary']) ?>
                         </div>
                     </div>
-                </form>
+                </div>
+
+                <? ActiveForm::end() ?>
+
             </div>
         </div>
     </div>
