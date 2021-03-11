@@ -58,6 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             ['class' => 'yii\grid\ActionColumn']
         ]
-    ]); ?>
+    ]);
+        //\common\helpers\DebugHelper::printSingleObject($dataProvider->getModels());
+    ?>
 
 </div>
