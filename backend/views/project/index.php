@@ -9,8 +9,10 @@ use yii\grid\GridView;
 
 $this->title = 'Projects';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="project-index">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -19,8 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?= GridView::widget([
 
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -28,17 +30,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'description',
+            [
+                'attribute' => 'description',
+                'value' => function ($model) {
+                    return \common\helpers\DebugHelper::cutString($model->description, 100);
+                }
+            ],
             'link',
             'image',
             'created_at',
             'update_at',
             'date',
-            'user.username',
-            'category',
+            [
+                'attribute' => 'user_name',
+                'value' => function ($model) {
+                    return $model->user->username;
+                }
+            ],
+            [
+                'attribute' => 'category_id',
+                'value' => 'category',
+                'filter' => $searchModel::getCategories()
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+
+    ?>
 
 
 </div>

@@ -77,7 +77,10 @@ use kartik\date\DatePicker;
     ?>
 
     <?//= $form->field($model, 'user_id')->textInput() ?>
-    <?= $form->field($model, 'category_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'category_id')
+            ->dropDownList($model::getCategories())
+        //->textInput(['maxlength' => true]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

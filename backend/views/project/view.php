@@ -35,17 +35,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'link',
             [
                 'attribute' => 'image',
-                'value' => Html::img('http://front.port/uploads/' . $model->image,[
-                        'class'=>'img-responsive'
-                ] ),
+                'value' => Html::img('http://front.port/uploads/' . $model->image, [
+                    'class' => 'img-responsive'
+                ]),
                 'format' => 'raw',
             ],
             'created_at',
             'date',
-            'user_id',
+            [
+                'attribute' => 'user_name',
+                'value' => $model->user->username,
+            ],
             'update_at',
-            'category_id'
+            [
+                'attribute' => 'category_id',
+                'value'=>$model::getCategories()[$model['category_id']]
+            ],
         ],
-    ]) ?>
+    ]);
+
+    ?>
 
 </div>

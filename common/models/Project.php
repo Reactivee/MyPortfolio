@@ -23,6 +23,7 @@ use yii\web\UploadedFile;
  * @property int $category_id
  *
  * @property string|null $imageHelper
+ * @property User $user
  *
  */
 class Project extends ActiveRecord
@@ -43,6 +44,8 @@ class Project extends ActiveRecord
             ],
         ];
     }
+
+    public $user_name;
     public $imagePath;
     public $helpImage;
 
@@ -63,7 +66,8 @@ class Project extends ActiveRecord
             [['title', 'category_id', 'user_id'], 'required'],
             [['created_at', 'date', 'update_at'], 'safe'],
             [['user_id', 'category_id'], 'integer'],
-            [['title', 'description', 'link', 'image', 'imagePath'], 'string', 'max' => 255],
+            ['description', 'string'],
+            [['title', 'link', 'image', 'imagePath'], 'string', 'max' => 255],
         ];
     }
 
@@ -131,19 +135,19 @@ class Project extends ActiveRecord
 
     public function getUser()
     {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(User::class,['id'=>'user_id']);
     }
 
     public static function getCategories()
     {
         return [
-            1 => 'Landing Page',
-            2 => 'E Commerce',
-            3 => 'HTML Template',
-            4 => 'Visit site',
-            5 => 'CMS Site',
-            6 => 'Browser App',
-            7 => 'Multimedia template',
+            0 => 'Landing Page',
+            1 => 'E Commerce',
+            2 => 'HTML Template',
+            3 => 'Visit site',
+            4 => 'CMS Site',
+            5 => 'Browser App',
+            6 => 'Multimedia template',
         ];
     }
 

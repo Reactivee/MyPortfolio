@@ -38,7 +38,9 @@ class ProjectController extends Controller
     public function actionIndex()
     {
         $searchModel = new ProjectSearch();
+//        DebugHelper::printSingleObject($searchModel);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -122,12 +124,7 @@ class ProjectController extends Controller
     {
         $this->findModel($id)->delete();
 
-        echo Alert::widget([
-            'options' => [
-                'class' => 'alert-info',
-            ],
-            'body' => 'Say hello...',
-        ]);
+
         return $this->redirect(['index']);
     }
 

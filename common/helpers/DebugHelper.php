@@ -18,4 +18,25 @@ class DebugHelper
         echo "</pre>";
         if ($die) die();
     }
+
+    public static function cutString_($string)
+    {
+        $strLen = strlen($string);
+        $read = '';
+        if ($strLen >= 5) {
+            $read = substr($string, 0, 5);
+        } else {
+            return $string;
+        }
+
+        return $read;
+    }
+
+    public static function cutString($string, $limit = 5)
+    {
+        if (strlen($string) >= $limit)
+            return substr($string, 0, $limit) . ' ...';
+        return $string;
+    }
+
 }

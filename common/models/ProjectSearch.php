@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\helpers\DebugHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Project;
@@ -22,8 +23,8 @@ class ProjectSearch extends Project
     public function rules()
     {
         return [
-            [['id', 'user_id','category_id'], 'integer'],
-            [['title', 'description', 'link', 'image', 'created_at', 'date','update_at'], 'safe'],
+            [['id', 'user_id', 'category_id'], 'integer'],
+            [['title', 'description', 'link', 'image', 'created_at', 'date', 'update_at', 'user_name'], 'safe'],
         ];
     }
 
@@ -45,14 +46,16 @@ class ProjectSearch extends Project
      */
     public function search($params)
     {
-        $query = Project::find();
+
+        $query = Project::find()
+            ->alias('p')
+            ->innerJoin(['u' => User::tableName()], 'p.user_id = u.id');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
         $this->load($params);
 
         if (!$this->validate()) {
@@ -62,18 +65,20 @@ class ProjectSearch extends Project
         }
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'update_at' => $this->update_at,
-            'date' => $this->date,
-            'user_id' => $this->user_id,
-            'category_at' => $this->category_id ,
+            'p.id' => $this->id,
+            'p.created_at' => $this->created_at,
+            'p.update_at' => $this->update_at,
+            'p.date' => $this->date,
+            'p.user_id' => $this->user_id,
+            'p.category_id' => $this->category_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'link', $this->link])
-            ->andFilterWhere(['like', 'image', $this->image]);
+        $query
+            ->andFilterWhere(['like', 'p.title', $this->title])
+            ->andFilterWhere(['like', 'p.description', $this->description])
+            ->andFilterWhere(['like', 'u.username', $this->user_name])
+            ->andFilterWhere(['like', 'p.link', $this->link])
+            ->andFilterWhere(['like', 'p.image', $this->image]);
 
         return $dataProvider;
     }
