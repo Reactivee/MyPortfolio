@@ -7,8 +7,8 @@ use Yii;
 /**
  * This is the model class for table "feedback".
  *
- * @property string $firstname
- * @property string $lastname
+ * @property string $first_name
+ * @property string $last_name
  * @property string $email
  * @property string $phone
  * @property string $message
@@ -29,9 +29,9 @@ class Feedback extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firstname', 'lastname', 'email', 'phone', 'message'], 'required'],
+            [['first_name', 'last_name', 'email', 'message'], 'required'],
             [['message'], 'string'],
-            [['firstname', 'lastname', 'email', 'phone'], 'string', 'max' => 255],
+            [['first_name', 'last_name', 'email', 'phone'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,8 +41,8 @@ class Feedback extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'firstname' => 'Firstname',
-            'lastname' => 'Lastname',
+            'first_name' => 'First name',
+            'last_name' => 'Last name',
             'email' => 'Email',
             'phone' => 'Phone',
             'message' => 'Message',
