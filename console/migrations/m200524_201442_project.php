@@ -15,12 +15,14 @@ class m200524_201442_project extends Migration
         $this->createTable('{{%project}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(255)->notNull(),
-            'description' => $this->string(255)->notNull(),
-            'link' => $this->string(255)->notNull(),
+            'category_id' => $this->integer()->notNull(),
+            'description' => $this->text(),
+            'link' => $this->string(255),
             'image' => $this->string(255),
-            'created_at' => $this->date()->notNull(),
             'date' => $this->date(),
             'user_id' => $this->integer()->notNull(),
+            'created_at' => $this->timestamp(),
+            'update_at' => $this->timestamp(),
         ], $tableOptions);
     }
 
