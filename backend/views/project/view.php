@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'link',
             [
                 'attribute' => 'image',
-                'value' => Html::img('http://front.port/uploads/' . $model->image, [
+                'value' => Html::img(Yii::$app->params['frontend_domain'] . '/uploads/' . $model->image, [
                     'class' => 'img-responsive'
                 ]),
                 'format' => 'raw',
