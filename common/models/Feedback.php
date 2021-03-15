@@ -12,6 +12,8 @@ use Yii;
  * @property string $email
  * @property string $phone
  * @property string $message
+ * @property string $files
+
  */
 class Feedback extends \yii\db\ActiveRecord
 {
@@ -26,6 +28,7 @@ class Feedback extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public  $files;
     public function rules()
     {
         return [
@@ -48,6 +51,7 @@ class Feedback extends \yii\db\ActiveRecord
             'phone' => 'Phone',
             'message' => 'Message',
             'captcha' => 'Kod',
+            'files'=>'File yuklash'
         ];
     }
 }

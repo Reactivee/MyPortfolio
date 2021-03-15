@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\helpers\DebugHelper;
 use common\models\Feedback;
+use common\models\MyFIles;
 use common\models\Project;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -18,6 +19,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -81,7 +83,8 @@ class SiteController extends Controller
         return $this->render('index', [
             'projects' => Project::find()->asArray()->all(),
             'allCategories' => Project::getCategories(),
-            'feedback' => new Feedback()
+            'feedback' => new Feedback(),
+//            'files'=>new MyFIles()
         ]);
     }
 
@@ -270,10 +273,13 @@ class SiteController extends Controller
     {
 
         $model = new Feedback();
-
+//        $files=new MyFIles();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $name=UploadedFile::getInstance($model,'files');
+                $name->saveAs('/web/uploads/'.$name->baseName.'.'.$name->extension);
             return $this->redirect(['index', 'status' => 1]);
         } else {
+
             return $this->redirect(['index', 'status' => 0]);
 
         }

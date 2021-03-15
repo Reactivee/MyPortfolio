@@ -131,7 +131,8 @@ use yii\widgets\ActiveForm;
                 <?
                 $form = ActiveForm::begin([
                     'id' => 'contact-form',
-                    'action' => ['site/feedback']
+                    'action' => ['site/feedback'],
+                    'options'=>['enctype'=>'multipart/form-data']
                 ]); ?>
                 <div class="messages"></div>
                 <div class="controls">
@@ -171,6 +172,11 @@ use yii\widgets\ActiveForm;
                             <?= $form->field($feedback, 'captcha')->widget(\yii\captcha\Captcha::classname(), [
                                 // configure additional widget properties here
                             ]) ?>
+                        </div>
+                        <div class="col-md-12">
+                            <?= $form->field($feedback, 'files')
+                                ->fileInput()
+                            ?>
                         </div>
 
                         <div class="col-md-12 text-center">
