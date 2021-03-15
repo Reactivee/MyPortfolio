@@ -17,6 +17,8 @@ use Yii;
  */
 class Feedback extends \yii\db\ActiveRecord
 {
+
+    public $captcha;
     /**
      * {@inheritdoc}
      */
@@ -33,8 +35,8 @@ class Feedback extends \yii\db\ActiveRecord
     {
         return [
             [['first_name', 'last_name', 'email', 'message','captcha'], 'required'],
-            [['message','captcha'], 'string'],
-//            ['captcha','verifyCode'],
+            [['message'], 'string'],
+            ['captcha', 'captcha'],
             [['first_name', 'last_name', 'email', 'phone'], 'string', 'max' => 255],
         ];
     }
