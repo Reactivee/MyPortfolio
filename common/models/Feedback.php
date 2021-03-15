@@ -49,7 +49,6 @@ class Feedback extends \yii\db\ActiveRecord
             'email' => 'Email',
             'phone' => 'Phone',
             'message' => 'Message',
-            'captcha' => 'Kod',
             'files'=>'File yuklash'
         ];
     }

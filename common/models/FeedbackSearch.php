@@ -18,7 +18,7 @@ class FeedbackSearch extends Feedback
     {
         return [
             [['id'], 'integer'],
-            [['first_name', 'last_name', 'email', 'phone', 'message', 'captcha'], 'safe'],
+            [['first_name', 'last_name', 'email', 'phone', 'message', 'files'], 'safe'],
         ];
     }
 
@@ -65,8 +65,7 @@ class FeedbackSearch extends Feedback
             ->andFilterWhere(['like', 'last_name', $this->last_name])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'message', $this->message])
-            ->andFilterWhere(['like', 'captcha', $this->captcha]);
+            ->andFilterWhere(['like', 'message', $this->message]);
         return $dataProvider;
     }
 }
