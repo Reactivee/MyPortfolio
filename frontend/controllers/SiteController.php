@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\helpers\DebugHelper;
 use common\models\Feedback;
 use common\models\Project;
 use frontend\models\ResendVerificationEmailForm;
@@ -264,4 +265,19 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionFeedback()
+    {
+
+        $model = new Feedback();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'status' => 1]);
+        } else {
+            return $this->redirect(['index', 'status' => 0]);
+
+        }
+
+    }
+
 }

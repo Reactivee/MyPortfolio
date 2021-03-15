@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'image',
                 'filter' => false,
                 'value' => function (Project $model) {
+//                        \common\helpers\DebugHelper::printSingleObject(Yii::$app->params);
                     return Html::img(Yii::$app->params['frontend_domain'] . '/uploads/' . $model->image, ['class' => 'img img-responsive']);
                 },
                 'format' => 'raw'

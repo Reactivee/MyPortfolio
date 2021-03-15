@@ -20,18 +20,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
+    <?=
+
+//    \common\helpers\DebugHelper::printSingleObject($searchModel);
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'firstname',
-            'lastname',
+            'first_name',
+            'last_name',
             'email:email',
             'phone',
-            //'message:ntext',
+            'message:ntext',
+            'captcha',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

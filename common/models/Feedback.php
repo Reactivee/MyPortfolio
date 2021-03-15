@@ -29,8 +29,9 @@ class Feedback extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'email', 'message'], 'required'],
-            [['message'], 'string'],
+            [['first_name', 'last_name', 'email', 'message','captcha'], 'required'],
+            [['message','captcha'], 'string'],
+//            ['captcha','verifyCode'],
             [['first_name', 'last_name', 'email', 'phone'], 'string', 'max' => 255],
         ];
     }
@@ -46,6 +47,7 @@ class Feedback extends \yii\db\ActiveRecord
             'email' => 'Email',
             'phone' => 'Phone',
             'message' => 'Message',
+            'captcha' => 'Kod',
         ];
     }
 }

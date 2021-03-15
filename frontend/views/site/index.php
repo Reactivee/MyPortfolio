@@ -167,6 +167,11 @@ use yii\widgets\ActiveForm;
                                 ->label(false);
                             ?>
                         </div>
+                        <div class="col-md-12">
+                            <?= $form->field($feedback, 'captcha')->widget(\yii\captcha\Captcha::classname(), [
+                                // configure additional widget properties here
+                            ]) ?>
+                        </div>
 
                         <div class="col-md-12 text-center">
                             <?= Html::submitButton('Send message', ['class' => 'btn btn-outline-primary']) ?>
