@@ -2,9 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\helpers\DebugHelper;
 use common\models\Feedback;
-use common\models\MyFIles;
 use common\models\Project;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -273,17 +271,17 @@ class SiteController extends Controller
     {
 
         $model = new Feedback();
-//        $files=new MyFIles();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $name=UploadedFile::getInstance($model,'files');
-                $name->saveAs('/web/uploads/'.$name->baseName.'.'.$name->extension);
-            return $this->redirect(['index', 'status' => 1]);
-        } else {
-
-            return $this->redirect(['index', 'status' => 0]);
-
+        if ($model->load(Yii::$app->request->post())) {
+            $image = UploadedFile::getInstance($model, 'files');
+            if ($image) {
+                $imageName = Project::createGuid() . '_' . '.' . $image->getExtension();
+                $model->files = $imageName;
+                $image->saveAs(Project::uploadImagePath() . '/feedback/' . $imageName);
+            }
+            if ($model->save())
+                return $this->redirect(['index', 'status' => 1]);
         }
-
+        return $this->redirect(['index', 'status' => 0]);
     }
 
 }

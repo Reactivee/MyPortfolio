@@ -30,7 +30,7 @@ class Feedback extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public  $files;
+
     public function rules()
     {
         return [
