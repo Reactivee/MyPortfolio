@@ -35,6 +35,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'phone',
             'message:ntext',
+            [
+                'attribute' => 'files',
+                'value' => $model->files ?
+                    Html::a('File',
+                        Yii::$app->params['frontend_domain'] . '/uploads/feedback/' . $model->files,
+                        ['download' => true, 'target' => '_blank'])
+                    : '',
+                'format' => 'raw',
+            ]
         ],
     ]) ?>
 

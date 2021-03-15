@@ -23,7 +23,8 @@ class FeedBackForm extends Feedback
             [['first_name', 'last_name', 'email', 'message', 'captcha'], 'required'],
             [['message'], 'string'],
             ['captcha', 'captcha'],
-            [['first_name', 'last_name', 'email', 'phone'], 'string', 'max' => 255],
+            ['email','email'],
+            [['first_name', 'last_name', 'phone'], 'string', 'max' => 255],
             [
                 'fileHelper', 'file',
                 'extensions' => 'docx,jpg,png',
