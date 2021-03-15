@@ -2,8 +2,8 @@
 
 namespace frontend\controllers;
 
-use common\models\Feedback;
 use common\models\Project;
+use frontend\models\FeedBackForm;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -81,7 +81,7 @@ class SiteController extends Controller
         return $this->render('index', [
             'projects' => Project::find()->asArray()->all(),
             'allCategories' => Project::getCategories(),
-            'feedback' => new Feedback(),
+            'feedback' => new FeedBackForm(),
 //            'files'=>new MyFIles()
         ]);
     }
@@ -270,9 +270,9 @@ class SiteController extends Controller
     public function actionFeedback()
     {
 
-        $model = new Feedback();
+        $model = new FeedBackForm();
         if ($model->load(Yii::$app->request->post())) {
-            $image = UploadedFile::getInstance($model, 'files');
+            $image = UploadedFile::getInstance($model, 'fileHelper');
             if ($image) {
                 $imageName = Project::createGuid() . '_' . '.' . $image->getExtension();
                 $model->files = $imageName;

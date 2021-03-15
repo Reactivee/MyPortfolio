@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 
 /**
  * This is the model class for table "feedback".
@@ -18,7 +17,6 @@ use Yii;
 class Feedback extends \yii\db\ActiveRecord
 {
 
-    public $captcha;
     /**
      * {@inheritdoc}
      */
@@ -34,10 +32,9 @@ class Feedback extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'email', 'message','captcha'], 'required'],
+            [['first_name', 'last_name', 'email', 'message'], 'required'],
             [['message'], 'string'],
-            ['captcha', 'captcha'],
-            [['first_name', 'last_name', 'email', 'phone'], 'string', 'max' => 255],
+            [['first_name', 'last_name', 'email', 'phone', 'files'], 'string', 'max' => 255],
         ];
     }
 
