@@ -66,7 +66,7 @@ class SiteController extends Controller
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'fixedVerifyCode' => 'testme',
             ],
         ];
     }
@@ -271,7 +271,7 @@ class SiteController extends Controller
     {
 
         $model = new FeedBackForm();
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post() + $_FILES)) {
             $image = UploadedFile::getInstance($model, 'fileHelper');
             if ($image) {
                 $imageName = Project::createGuid() . '_' . '.' . $image->getExtension();

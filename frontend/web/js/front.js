@@ -309,4 +309,23 @@ function map() {
         }
     }
 
+
+    $('#contact-form').on('beforeSubmit', function () {
+        let formData = $(this).serialize(); // get form data
+        $.ajax({
+            url: '/api/feedback',
+            data: formData,
+            type: 'POST',
+            success: res => {
+                console.log('ressss');
+                console.log(res);
+            },
+            error: error => {
+                console.log(error)
+            }
+        })
+    }).submit(e => {
+        e.preventDefault()
+    })
+
 }
