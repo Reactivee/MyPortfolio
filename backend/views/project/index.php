@@ -54,12 +54,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'user_name',
                 'value' => function (Project $model) {
+//                \common\helpers\DebugHelper::printSingleObject($model);
                     return $model->user->username;
                 }
             ],
             ['class' => 'yii\grid\ActionColumn']
         ]
     ]);
+
         //\common\helpers\DebugHelper::printSingleObject($dataProvider->getModels());
     ?>
 
