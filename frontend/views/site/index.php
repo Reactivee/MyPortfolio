@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
-<!--            <!-- Reference detail-->-->
+<!--            Reference detail-->
 <!--            <div id="references-masonry" data-animate="fadeInUp">-->
 <!--                <div class="row">-->
 <!--                    --><?// foreach ($projects as $project) { ?>
@@ -140,52 +140,37 @@ use yii\widgets\ActiveForm;
 
                         <div class="col-md-6">
                             <?= $form->field($feedback, 'first_name')
-                                ->textInput([
-                                    'value' => 'testme',
-                                    'placeholder' => $feedback->getAttributeLabel('first_name') . ' *'])
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('first_name') . ' *'])
                                 ->label(false);
                             ?>
                         </div>
                         <div class="col-md-6">
                             <?= $form->field($feedback, 'last_name')
-                                ->textInput([
-                                    'value' => 'testme',
-                                    'placeholder' => $feedback->getAttributeLabel('last_name') . ' *'])
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('last_name') . ' *'])
                                 ->label(false);
                             ?>
                         </div>
                         <div class="col-md-6">
                             <?= $form->field($feedback, 'email')
-                                ->textInput([
-                                    'value' => 'testme@test.me',
-                                    'placeholder' => $feedback->getAttributeLabel('email') . ' *'])
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('email') . ' *'])
                                 ->label(false);
                             ?>
                         </div>
                         <div class="col-md-6">
                             <?= $form->field($feedback, 'phone')
-                                ->textInput([
-                                    'value' => 'testme',
-                                    'placeholder' => $feedback->getAttributeLabel('phone')])
+                                ->textInput(['placeholder' => $feedback->getAttributeLabel('phone')])
                                 ->label(false);
                             ?>
                         </div>
                         <div class="col-md-12">
                             <?= $form->field($feedback, 'message')
-                                ->textarea([
-                                    'value' => 'testme',
-                                    'placeholder' => $feedback->getAttributeLabel('message') . ' *', 'rows' => 4])
+                                ->textarea(['placeholder' => $feedback->getAttributeLabel('message') . ' *', 'rows' => 4])
                                 ->label(false);
                             ?>
                         </div>
                         <div class="col-md-12">
                             <?= $form->field($feedback, 'captcha')
-                                ->widget(\yii\captcha\Captcha::classname(), [
-                                    // configure additional widget properties here
-                                    'options' => [
-                                        'value' => 'testme'
-                                    ]
-                                ]) ?>
+                                ->widget(\yii\captcha\Captcha::class) ?>
                         </div>
                         <div class="col-md-12">
                             <?= $form->field($feedback, 'fileHelper')->fileInput()
