@@ -98,4 +98,31 @@ class ApiController extends Controller
         return $data;
     }
 
+    public function actionTask ($id)
+    {
+        $users=Feedback::find()
+            ->where(['id'=> $id ])
+//            ->orderBy('id')
+            ->asArray()
+            ->one();
+        return $users;
+    }
+
+    public function actionComp ($one,$two)
+    {
+         $item=" katta";
+         if($one>$two){
+             return $one . $item;
+         }
+         elseif($one<$two){
+             return $two . $item;
+         }
+         else{
+             return " teng";
+         }
+
+
+    }
+
+
 }

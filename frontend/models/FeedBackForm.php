@@ -20,7 +20,7 @@ class FeedBackForm extends Feedback
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'email', 'message', 'captcha'], 'required'],
+            [['first_name', 'last_name', 'email', 'message'], 'required'],
             [['message'], 'string'],
             ['captcha', 'captcha'],
             ['email','email'],
