@@ -311,14 +311,20 @@ function map() {
 
 
     $('#contact-form').on('beforeSubmit', function () {
-        let formData = $(this).serialize(); // get form data
         $.ajax({
             url: '/api/feedback',
-            data: formData,
+            dataType: "JSON",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
             type: 'POST',
             success: res => {
-                console.log('ressss');
-                console.log(res);
+                if (res.status) {
+                    alert('Feedback has been sent')
+                } else {
+                    alert('An error occurred')
+                }
+                $('#contact-form').get(0).reset()
             },
             error: error => {
                 console.log(error)

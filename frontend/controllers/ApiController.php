@@ -49,7 +49,7 @@ class ApiController extends Controller
             }
             return [
                 'status' => $model->save(),
-                'message' => 'No error'
+                'message' => $model->errors
             ];
         }
         return [
