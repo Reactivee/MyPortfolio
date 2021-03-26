@@ -309,29 +309,61 @@ function map() {
         }
     }
 
+}
 
-    $('#contact-form').on('beforeSubmit', function () {
-        $.ajax({
-            url: '/api/feedback',
-            dataType: "JSON",
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: res => {
-                if (res.status) {
-                    alert('Feedback has been sent')
-                } else {
-                    alert('An error occurred')
-                }
-                $('#contact-form').get(0).reset()
-            },
-            error: error => {
-                console.log(error)
+// $.ajax({
+//     url: '/api/get-projects',
+//     type: "GET",
+//     dataType: "json",
+//     success: function (data) {
+//         console.log(data)
+//         // alert(data);
+//     }
+// });
+
+//
+$('#contact-form').on('beforeSubmit', function () {
+    $.ajax({
+        url: '/api/feedback',
+        dataType: "JSON",
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: res => {
+            if (res.status) {
+                console.log(this);
+                alert('Feedback has been sent yes')
+
+            } else {
+                console.log(res);
+                alert('An error occurred mo')
             }
-        })
-    }).submit(e => {
-        e.preventDefault()
+            $('#contact-form').get(0).reset()
+        },
+        error: error => {
+            console.log(error)
+        }
+    })
+}).submit(e => {
+    e.preventDefault()
+})
+
+
+let one = document.querySelector('.one')
+$('#login-form2').on('keyup', function () {
+    let forma = document.querySelector('#feedback-first_name').value;
+    // document.querySelector('#feedback-first_name').value=forma;
+    $.ajax({
+        url: '/api/about?first_name=' + forma,
+        type: "GET",
+        dataType: "json",
+        success: res => {
+            console.log(res);
+        },
+        error: error => {
+            console.log(error)
+        }
     })
 
-}
+})

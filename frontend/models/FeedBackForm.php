@@ -35,4 +35,10 @@ class FeedBackForm extends Feedback
             ]
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'fileHelper'=>'File yuklash'
+        ];
+    }
 }

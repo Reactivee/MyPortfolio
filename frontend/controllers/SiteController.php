@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\helpers\DebugHelper;
+use common\models\Feedback;
 use common\models\Project;
 use frontend\models\FeedBackForm;
 use frontend\models\ResendVerificationEmailForm;
@@ -151,7 +153,8 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+//          DebugHelper::printSingleObject($feedback);
+        return $this->render('about',['model'=>new Feedback()]);
     }
 
     /**

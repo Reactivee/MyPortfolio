@@ -97,19 +97,17 @@ class Project extends ActiveRecord
             if (!$this->isNewRecord) {
                 if (!empty($this->image)) {
                     $oldImage = self::uploadImagePath() . $this->image;
-//                    DebugHelper::printSingleObject($oldImage,  1);
                     if (file_exists($oldImage)) {
                         unlink($oldImage);
                     }
                 }
             }
-
-
-            $imageName = self::createGuid() . '_' . '.' . $image->getExtension();
-            $this->image = $imageName;
-            $this->imagePath = self::uploadImagePath() . $imageName;
+            $imageName=self::createGuid().'_'.'.'.$image->getExtension();
+            $this->image=$imageName;
+            $this->imagePath=self::uploadImagePath().$imageName;
             $image->saveAs($this->imagePath);
         }
+
     }
 
     public static function uploadImagePath()

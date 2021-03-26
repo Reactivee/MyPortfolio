@@ -38,7 +38,6 @@ class ProjectController extends Controller
     public function actionIndex()
     {
         $searchModel = new ProjectSearch();
-//        DebugHelper::printSingleObject($searchModel);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -71,7 +70,7 @@ class ProjectController extends Controller
 
 
         if ($model->load(Yii::$app->request->post())) {
-
+//            DebugHelper::printSingleObject($model);
             //$model->user_id = Yii::$app->user->id;
             $model->uploadImage();
 

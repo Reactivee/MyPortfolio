@@ -9,6 +9,8 @@
 namespace frontend\controllers;
 
 
+use common\helpers\DebugHelper;
+use common\models\Feedback;
 use common\models\Project;
 use common\models\User;
 use frontend\models\FeedBackForm;
@@ -24,15 +26,8 @@ class ApiController extends Controller
     public function behaviors()
     {
         $b = parent::behaviors();
-        $b['contentNegotiator'] = [
-            'class' => ContentNegotiator::class,
-            'formats' => [
-                'application/json' => Response::FORMAT_JSON
-            ],
-        ];
-        /*$b[] = [
-            'class' => 'yii\filters\AjaxFilter',
-        ];*/
+        $b['contentNegotiator']['formats'] = ['application/json' => Response::FORMAT_JSON];
+        /*$b[] = ['class' => 'yii\filters\AjaxFilter'];*/
         return $b;
     }
 
@@ -71,22 +66,18 @@ class ApiController extends Controller
         ];
     }
 
-    public function actionGetData() {
+    public function actionGetData()
+    {
         return Yii::$app->request->get();
     }
 
-    public function actionGetProjects($limit = 5) {
-
+    public function actionGetProjects($limit = 5)
+    {
         $projects = Project::find()
             ->alias('p')
-            ->select([
-                'p.id',
-                'p.title',
-                'p.image',
-                'u.username'
-            ])
-            ->innerJoin(['u' => User::tableName()], 'u.id = p.user_id')
-            ->limit($limit)
+            ->select(['p.id', 'p.title', 'u.username'])
+            ->innerJoin(['u' => User::tableName()], 'u.id=p.user_id')
+            ->limit(5)
             ->asArray()
             ->all();
 
@@ -98,29 +89,38 @@ class ApiController extends Controller
         return $data;
     }
 
-    public function actionTask ($id)
+    public function actionTask($first_name)
     {
-        $users=Feedback::find()
-            ->where(['id'=> $id ])
+        $users = Feedback::find()
+            ->where(['first_name' => $first_name])
 //            ->orderBy('id')
             ->asArray()
-            ->one();
+            ->all();
         return $users;
     }
 
-    public function actionComp ($one,$two)
+    public function actionComp($one, $two)
     {
-         $item=" katta";
-         if($one>$two){
-             return $one . $item;
-         }
-         elseif($one<$two){
-             return $two . $item;
-         }
-         else{
-             return " teng";
-         }
+        $item = " katta";
+        if ($one > $two) {
+            return $one . $item;
+        } elseif ($one < $two) {
+            return $two . $item;
+        } else {
+            return " teng";
+        }
+    }
 
+    public function actionAbout($first_name)
+    {
+        if ($first_name) {
+            $feedback = Feedback::find()
+                ->where(['like', 'first_name', $first_name])
+//            ->orderBy('id')
+                ->asArray()
+                ->all();
+            return $feedback;
+        }
 
     }
 
