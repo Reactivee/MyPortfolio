@@ -1,5 +1,6 @@
 <?php
 
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
@@ -57,9 +58,6 @@ use kartik\date\DatePicker;
                 ]
             ]);
     }
-
-
-
     ?>
 
 
@@ -75,11 +73,16 @@ use kartik\date\DatePicker;
             ]
         ])
     ?>
-
+       <? $data=\yii\helpers\ArrayHelper::map($category,'id','category')?>
     <?//= $form->field($model, 'user_id')->textInput() ?>
-    <?= $form->field($model, 'category_id')
-            ->dropDownList($model::getCategories())
-        //->textInput(['maxlength' => true]);
+    <?= $form->field($model, 'category_id')->widget(Select2::className(),[
+        'data' => $data,
+        'language' => 'ru',
+        'options' => ['placeholder' => 'Select a state ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ])
     ?>
 
     <div class="form-group">

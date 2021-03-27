@@ -3,19 +3,20 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Project */
+/* @var $model common\models\Client */
 
-$this->title = 'Create Project';
-$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
+$this->title = 'Create Client';
+$this->params['breadcrumbs'][] = ['label' => 'Clients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="project-create">
+<div class="client-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
     <?= $this->render('_form', [
         'model' => $model,
-        'category'=>$category
     ]) ?>
+
 
 </div>

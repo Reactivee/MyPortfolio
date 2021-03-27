@@ -3,19 +3,18 @@
 namespace backend\controllers;
 
 use common\helpers\DebugHelper;
-use common\models\Category;
-use common\widgets\Alert;
+use kartik\form\ActiveForm;
 use Yii;
-use common\models\Project;
-use common\models\ProjectSearch;
+use common\models\Client;
+use common\models\ClientSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProjectController implements the CRUD actions for Project model.
+ * ClientController implements the CRUD actions for Client model.
  */
-class ProjectController extends Controller
+class ClientController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -33,67 +32,56 @@ class ProjectController extends Controller
     }
 
     /**
-     * Lists all Project models.
+     * Lists all Client models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectSearch();
+        $searchModel = new ClientSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $category = Category::find()->asArray()->all();
-        $data = \yii\helpers\ArrayHelper::map($category, 'id', 'category');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'data' => $data
         ]);
     }
 
     /**
-     * Displays a single Project model.
+     * Displays a single Client model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $category = Category::find()->asArray()->all();
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'category' => $category
         ]);
     }
 
     /**
-     * Creates a new Project model.
+     * Creates a new Client model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Project();
-        $category = Category::find()->asArray()->all();
+        $model = new Client();
 
-        if ($model->load(Yii::$app->request->post())) {
-//            DebugHelper::printSingleObject($model);
-            //$model->user_id = Yii::$app->user->id;
-            $model->uploadImage();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = 'json';
 
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                DebugHelper::printSingleObject($model->errors, 1);
-            }
+            return ActiveForm::validate($model);
+//            $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'category' => $category
         ]);
     }
 
     /**
-     * Updates an existing Project model.
+     * Updates an existing Client model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -102,25 +90,18 @@ class ProjectController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $category = Category::find()->asArray()->all();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->uploadImage();
 
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                DebugHelper::printSingleObject($model->errors, 1);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'category' => $category
         ]);
     }
 
     /**
-     * Deletes an existing Project model.
+     * Deletes an existing Client model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -130,20 +111,19 @@ class ProjectController extends Controller
     {
         $this->findModel($id)->delete();
 
-
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Project model based on its primary key value.
+     * Finds the Client model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Project the loaded model
+     * @return Client the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Project::findOne($id)) !== null) {
+        if (($model = Client::findOne($id)) !== null) {
             return $model;
         }
 

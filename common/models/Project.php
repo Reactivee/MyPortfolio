@@ -86,7 +86,7 @@ class Project extends ActiveRecord
             'update_at' => 'Update At',
             'date' => 'Date',
             'user_id' => 'User ID',
-            'category_id' => 'Category Id',
+            'category_id' => 'Category id',
         ];
     }
 
@@ -136,22 +136,22 @@ class Project extends ActiveRecord
         return $this->hasOne(User::class,['id'=>'user_id']);
     }
 
-    public static function getCategories()
-    {
-        return [
-            0 => 'Landing Page',
-            1 => 'E Commerce',
-            2 => 'HTML Template',
-            3 => 'Visit site',
-            4 => 'CMS Site',
-            5 => 'Browser App',
-            6 => 'Multimedia template',
-        ];
-    }
+//    public static function getCategories()
+//    {
+//        return [
+//            0 => 'Landing Page',
+//            1 => 'E Commerce',
+//            2 => 'HTML Template',
+//            3 => 'Visit site',
+//            4 => 'CMS Site',
+//            5 => 'Browser App',
+//            6 => 'Multimedia template',
+//        ];
+//    }
 
     public function getCategory()
     {
-        return self::getCategories()[$this->category_id];
+        return $this->hasOne(Category::class,['id'=>'category_id']);
     }
 
 }

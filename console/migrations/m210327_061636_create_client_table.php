@@ -2,7 +2,10 @@
 
 use yii\db\Migration;
 
-class m210524_201442_project extends Migration
+/**
+ * Handles the creation of table `{{%client}}`.
+ */
+class m210327_061636_create_client_table extends Migration
 {
     public function safeUp()
     {
@@ -11,20 +14,21 @@ class m210524_201442_project extends Migration
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-
-        $this->createTable('{{%feedback}}', [
+        $this->createTable('{{%client}}', [
             'id' => $this->primaryKey(),
-            'first_name' => $this->string(255)->notNull(),
-            'last_name' => $this->string()->notNull(),
-            'email' => $this->string()->notNull(),
+            'name' => $this->string(255)->notNull(),
+            'company_name' => $this->string()->notNull(),
             'phone' => $this->string(255),
-            'message' => $this->text()->notNull(),
-            'captcha' => $this->string(255),
+            'description' => $this->string(255),
+            'price' => $this->string(255)
         ], $tableOptions);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function safeDown()
     {
-        $this->dropTable('{{%feedback}}');
+        $this->dropTable('{{%client}}');
     }
 }

@@ -8,6 +8,7 @@ use common\models\Project;
  * @var $this yii\web\View
  * @var $searchModel common\models\ProjectSearch
  * @var $dataProvider yii\data\ActiveDataProvider
+ * @var $data backend\controllers\ProjectController
  */
 
 $this->title = 'Projects';
@@ -23,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+<!--   --><?// \common\helpers\DebugHelper::printSingleObject($data);?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -31,8 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'category_id',
-                'value' => 'category',
-                'filter' => $searchModel::getCategories()
+                'format'=>'raw',
+                'value' => function($model){
+                    return $model->category->category;
+                },
+                'filter' =>$data
             ],
             [
                 'attribute' => 'description',

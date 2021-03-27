@@ -49,7 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'update_at',
             [
                 'attribute' => 'category_id',
-                'value'=>$model::getCategories()[$model['category_id']]
+                'value' => function ($model) {
+                    return $model->category->category;
+                }
             ],
         ],
     ]);
