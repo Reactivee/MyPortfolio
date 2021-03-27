@@ -98,6 +98,8 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </div>
+
+
 </section>
 <!-- Customers-->
 <!--<section id="customers" class="customers-section bg-gray">
