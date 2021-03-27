@@ -37,7 +37,6 @@ use yii\widgets\ActiveForm;
                     </div>
                 </div>
             </div>
-            Reference detail
             <div id="references-masonry" data-animate="fadeInUp">
                 <div class="row">
                     <? foreach ($projects as $project) { ?>
