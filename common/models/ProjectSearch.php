@@ -49,7 +49,7 @@ class ProjectSearch extends Project
 
         $query = Project::find()
             ->alias('p')
-            ->innerJoin(['u' => User::tableName()], 'p.user_id = u.id');
+            ->leftJoin(['u' => User::tableName()], 'p.user_id = u.id');
 
         // add conditions that should always apply here
 

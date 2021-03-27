@@ -27,6 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--   --><?// \common\helpers\DebugHelper::printSingleObject($data);?>
 
     <?= GridView::widget([
+        //'dataProvider' => new \yii\data\ActiveDataProvider([
+        //    'query' => Project::find()
+        //        ->alias('p')
+        //        ->leftJoin(['u' => \common\models\User::tableName()], 'p.user_id = u.id'),
+        //]),
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
