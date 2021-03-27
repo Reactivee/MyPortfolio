@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 <section id="references">
     <div class="container">
         <div class="col-sm-12">
+
             <div class="mb-5 text-center">
                 <h2 data-animate="fadeInUp" class="title">My work</h2>
                 <p data-animate="fadeInUp" class="lead">
@@ -20,6 +21,31 @@ use yii\widgets\ActiveForm;
                     latest for you.
                 </p>
             </div>
+            <br>
+            <div class="mb-5 text-center">
+                <form action="<?= \yii\helpers\Url::to(['site/search']) ?>">
+
+                    <? echo \kartik\typeahead\Typeahead::widget([
+                        'name' => 'search_title',
+                        'options' => ['placeholder' => 'Qidiruv ...'],
+                        'pluginOptions' => ['highlight' => true],
+                        'dataset' => [
+                            [
+                                'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                                'display' => 'value',
+                                //'prefetch' => $baseUrl . '/samples/countries.json',
+                                'remote' => [
+                                    'url' => \yii\helpers\Url::to(['api/project-list']) . '?text=%QUERY',
+                                    'wildcard' => '%QUERY'
+                                ]
+                            ]
+                        ]
+                    ]); ?>
+
+                    <?= Html::submitButton('Search', ['class' => 'btn btn-success']) ?>
+                </form>
+            </div>
+            <br>
             <ul id="filter" data-animate="fadeInUp">
                 <li class="active"><a href="#" data-filter="all">All</a></li>
                 <? foreach ($allCategories as $category) { ?>
@@ -118,7 +144,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 </section>-
-<!-- Contact-->
+Contact-->
 <section id="contact" data-animate="bounceIn" class="contact-section contact">
     <div class="container">
         <header class="text-center">

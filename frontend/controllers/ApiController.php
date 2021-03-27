@@ -14,6 +14,7 @@ use common\models\Feedback;
 use common\models\Project;
 use common\models\User;
 use frontend\models\FeedBackForm;
+use yii\db\Query;
 use yii\filters\ContentNegotiator;
 use yii\rest\Controller;
 use Yii;
@@ -53,7 +54,8 @@ class ApiController extends Controller
         ];
     }
 
-    public function actionTest($id = 0) {
+    public function actionTest($id = 0)
+    {
         return [
             'id' => 3 * $id,
             'status' => 'OK',
@@ -124,5 +126,24 @@ class ApiController extends Controller
 
     }
 
+
+    /**
+     * @param $text
+     * @throws \yii\db\Exception
+     */
+    public function actionProjectList($text)
+    {
+        $data = Project::find()
+            ->select('title')
+            ->where('title LIKE "%' . $text . '%"')
+            ->orderBy('title')
+            ->all();
+        $out = [];
+        foreach ($data as $d)
+            $out[] = [
+                'value' => $d['title']
+            ];
+        return $out;
+    }
 
 }
