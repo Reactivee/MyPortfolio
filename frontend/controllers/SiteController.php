@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\helpers\DebugHelper;
+use common\models\Category;
 use common\models\Feedback;
 use common\models\Project;
 use frontend\models\FeedBackForm;
@@ -10,6 +11,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -80,9 +82,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $category=Category::find()->asArray()->all();
+         $data=ArrayHelper::map($category,'id','category');
         return $this->render('index', [
             'projects' => Project::find()->asArray()->all(),
-            'allCategories' => Project::getCategories(),
+            'allCategories' => $data,
             'feedback' => new FeedBackForm(),
 //            'files'=>new MyFIles()
         ]);
