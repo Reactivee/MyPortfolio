@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "def0df9ed52d4b8ad73df11d611f729c",
+    "content-hash": "2ab10689befe8930eb8b7a3865a03125",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -1783,7 +1783,7 @@
         },
         {
             "name": "kartik-v/yii2-widget-typeahead",
-            "version": "v1.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-typeahead.git",
@@ -1798,6 +1798,7 @@
             "require": {
                 "kartik-v/yii2-krajee-base": ">=2.0.0"
             },
+            "default-branch": true,
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -1834,7 +1835,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kartik-v/yii2-widget-typeahead/issues",
-                "source": "https://github.com/kartik-v/yii2-widget-typeahead/tree/master"
+                "source": "https://github.com/kartik-v/yii2-widget-typeahead/tree/v1.0.4"
             },
             "time": "2019-05-29T12:06:56+00:00"
         },
