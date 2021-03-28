@@ -69,7 +69,7 @@ class Project extends ActiveRecord
             [['title_uz', 'category_id', 'user_id'], 'required'],
             [['created_at', 'date', 'update_at'], 'safe'],
             [['user_id', 'category_id'], 'integer'],
-            ['description_uz', 'description_ru'/*, 'description_en'*/, 'string'],
+            [['description_uz', 'description_ru'/*, 'description_en'*/], 'string'],
             [['title_uz', 'title_ru', 'link', 'image', 'imagePath'], 'string', 'max' => 255],
         ];
     }

@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'title',
+            'title_uz',
+            'title_ru',
             [
                 'attribute' => 'category_id',
                 'format'=>'raw',
@@ -46,9 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' =>$data
             ],
             [
-                'attribute' => 'description',
+                'attribute' => 'description_uz',
                 'value' => function ($model) {
-                    return \common\helpers\DebugHelper::cutString($model->description, 100);
+                    return \common\helpers\DebugHelper::cutString($model->description_uz, 100);
+                }
+            ],
+            [
+                'attribute' => 'description_ru',
+                'value' => function ($model) {
+                    return \common\helpers\DebugHelper::cutString($model->description_ru, 100);
                 }
             ],
             'link:url',

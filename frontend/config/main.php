@@ -10,7 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language' => 'uz',
+
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -54,18 +54,7 @@ return [
             ],
         ],
         */
-        'i18n' => [
-            'translations' => [
-                'main*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@frontend/messages',
-                    'sourceLanguage' => 'uz',
-                    'fileMap' => [
-                        'main' => 'main.php',
-                    ]
-                ]
-            ]
-        ]
+
     ],
     'params' => $params,
 ];

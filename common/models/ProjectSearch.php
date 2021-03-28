@@ -24,7 +24,7 @@ class ProjectSearch extends Project
     {
         return [
             [['id', 'user_id', 'category_id'], 'integer'],
-            [['title', 'description', 'link', 'image', 'created_at', 'date', 'update_at', 'user_name'], 'safe'],
+            [['title_uz','title_ru', 'description_uz','description_ru', 'link', 'image', 'created_at', 'date', 'update_at', 'user_name'], 'safe'],
         ];
     }
 
@@ -74,8 +74,10 @@ class ProjectSearch extends Project
         ]);
 
         $query
-            ->andFilterWhere(['like', 'p.title', $this->title])
-            ->andFilterWhere(['like', 'p.description', $this->description])
+            ->andFilterWhere(['like', 'p.title_uz', $this->title_uz])
+            ->andFilterWhere(['like', 'p.title_ru', $this->title_ru])
+            ->andFilterWhere(['like', 'p.description_uz', $this->description_uz])
+            ->andFilterWhere(['like', 'p.description_ru', $this->description_ru])
             ->andFilterWhere(['like', 'u.username', $this->user_name])
             ->andFilterWhere(['like', 'p.link', $this->link])
             ->andFilterWhere(['like', 'p.image', $this->image]);

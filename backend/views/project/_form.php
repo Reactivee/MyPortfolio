@@ -15,12 +15,13 @@ use kartik\date\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title_uz')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title_ru')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')
+    <?= $form->field($model, 'description_uz')
     ->widget(\dosamigos\ckeditor\CKEditor::class, [
         'options' => [
-            'id' => 'CK-desc'
+            'id' => 'CK-desc_uz'
         ],
         'preset' => 'custom',
         'clientOptions' => [
@@ -55,7 +56,44 @@ use kartik\date\DatePicker;
             ],
         ],
     ])?>
-
+    <?= $form->field($model, 'description_ru')
+        ->widget(\dosamigos\ckeditor\CKEditor::class, [
+            'options' => [
+                'id' => 'CK-desc_ru'
+            ],
+            'preset' => 'custom',
+            'clientOptions' => [
+                'height' => 400,
+                'language' => 'en',
+                'extraPlugins' => 'font,smiley,colorbutton,iframe,selectall,copyformatting,justify',
+                'removeButtons' => 'About,Anchor,Styles,Font',
+                "toolbarGroups" => [
+                    ['name' => 'document', 'groups' => ['mode']],
+                    ['name' => 'clipboard', 'groups' => ['undo', 'clipboard']],
+                    ['name' => 'editing', 'groups' => ['find', 'selection', 'editing']],
+                    ['name' => 'links', 'groups' => ['links']],
+                    ['name' => 'insert', 'groups' => ['insert']],
+                    ['name' => 'colors', 'groups' => ['colors']],
+                    '/',
+                    ['name' => 'basicstyles', 'groups' => ['basicstyles', 'cleanup']],
+                    ['name' => 'paragraph', 'groups' => ['list', 'indent', 'blocks', 'align', 'paragraph']],
+                    ['name' => 'styles', 'groups' => ['styles']]
+                ],
+                'toolbar' => [
+                    ['name' => 'document', 'items' => ['Source']],
+                    ['name' => 'clipboard', 'items' => ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord']],
+                    ['name' => 'editing', 'items' => ['SelectAll']],
+                    ['name' => 'links', 'items' => ['Link', 'Unlink']],
+                    ['name' => 'insert', 'items' => ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe']],
+                    ['name' => 'colors', 'items' => ['TextColor', 'BGColor']],
+                    ['name' => 'tools', 'items' => ['Maximize']],
+                    '/',
+                    ['name' => 'basicstyles', 'items' => ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']],
+                    ['name' => 'paragraph', 'items' => ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']],
+                    ['name' => 'styles', 'items' => ['Format', 'FontSize']]
+                ],
+            ],
+        ])?>
     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
     <? if ($model->image) {

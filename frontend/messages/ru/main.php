@@ -12,4 +12,5 @@ return [
     'Loyihalarim' => 'Мои проекты',
     'Ism' => 'Имя',
     'File yuklash' => 'Загрузить файл',
+    'IT Ishchi'=>'ИТ Рабочий',
 ];
