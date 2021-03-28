@@ -13,8 +13,12 @@ use yii\web\UploadedFile;
  * This is the model class for table "project".
  *
  * @property int $id
- * @property string $title
- * @property string $description
+ * @property string $title_uz
+ * @property string $title_ru
+ * @property string $title_en
+ * @property string $description_uz
+ * @property string $description_ru
+ * @property string $description_en
  * @property string|null $link
  * @property string $image
  * @property string $created_at
@@ -28,7 +32,6 @@ use yii\web\UploadedFile;
  */
 class Project extends ActiveRecord
 {
-
 
 
     public function behaviors()
@@ -63,11 +66,11 @@ class Project extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'category_id', 'user_id'], 'required'],
+            [['title_uz', 'category_id', 'user_id'], 'required'],
             [['created_at', 'date', 'update_at'], 'safe'],
             [['user_id', 'category_id'], 'integer'],
-            ['description', 'string'],
-            [['title', 'link', 'image', 'imagePath'], 'string', 'max' => 255],
+            ['description_uz', 'description_ru'/*, 'description_en'*/, 'string'],
+            [['title_uz', 'title_ru', 'link', 'image', 'imagePath'], 'string', 'max' => 255],
         ];
     }
 
@@ -78,8 +81,12 @@ class Project extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
+            'title_uz' => Yii::t('main', 'Nomi') . 'UZ',
+            'title_ru' => Yii::t('main', 'Nomi') . 'RU',
+            //'title_en' => Yii::t('main', 'Nomi') . 'EN',
+            'description_uz' => Yii::t('main', 'Izoh') . 'UZ',
+            'description_ru' => Yii::t('main', 'Izoh') . 'RU',
+            //'description_en' => Yii::t('main', 'Izoh') . 'EN',
             'link' => 'Link',
             'image' => 'Image',
             'created_at' => 'Created At',
@@ -102,9 +109,9 @@ class Project extends ActiveRecord
                     }
                 }
             }
-            $imageName=self::createGuid().'_'.'.'.$image->getExtension();
-            $this->image=$imageName;
-            $this->imagePath=self::uploadImagePath().$imageName;
+            $imageName = self::createGuid() . '_' . '.' . $image->getExtension();
+            $this->image = $imageName;
+            $this->imagePath = self::uploadImagePath() . $imageName;
             $image->saveAs($this->imagePath);
         }
 
@@ -115,7 +122,6 @@ class Project extends ActiveRecord
         return Yii::getAlias('@frontend') . '/web/uploads/';
     }
 
-//Question
     public static function createGuid()
     {
         $guid = '';
@@ -133,25 +139,12 @@ class Project extends ActiveRecord
 
     public function getUser()
     {
-        return $this->hasOne(User::class,['id'=>'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
-
-//    public static function getCategories()
-//    {
-//        return [
-//            0 => 'Landing Page',
-//            1 => 'E Commerce',
-//            2 => 'HTML Template',
-//            3 => 'Visit site',
-//            4 => 'CMS Site',
-//            5 => 'Browser App',
-//            6 => 'Multimedia template',
-//        ];
-//    }
 
     public function getCategory()
     {
-        return $this->hasOne(Category::class,['id'=>'category_id']);
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
 }
