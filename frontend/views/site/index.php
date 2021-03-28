@@ -19,8 +19,7 @@ use yii\widgets\ActiveForm;
                     <?= Yii::t('main', 'Loyihalarim') ?>
                 </h2>
                 <p data-animate="fadeInUp" class="lead">
-                    I have worked on dozens of projects so I have picked only the
-                    latest for you.
+                    <?= Yii::t('main','Men ko\'plab loyihalarda ishlaganman bular eng so\'ngilari') ?>
                 </p>
             </div>
             <br>
