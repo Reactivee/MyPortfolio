@@ -75,13 +75,13 @@ use yii\widgets\ActiveForm;
                                     <img src="\uploads\<?= $project['image'] ?>" alt="" class="img-fluid">
                                     <div class="overlay">
                                         <div class="inner">
-                                            <h3 class="h4 reference-title"><?= $project['title'] ?></h3>
-                                            <p><?= $project['description'] ?></p>
+                                            <h3 class="h4 reference-title"><?= $project['title_' . Yii::$app->language] ?></h3>
+                                            <p><?= $project['description_' . Yii::$app->language] ?></p>
                                         </div>
                                     </div>
                                 </a>
                                 <div data-images="\uploads\<?= $project['image'] ?>" class="sr-only reference-description">
-                                    <p><?= $project['description'] ?></p>
+                                    <p><?= $project['description_' . Yii::$app->language] ?></p>
                                     <p class="buttons text-center">
                                         <a href="javascript:void(0);" class="btn btn-outline-primary">
                                             <i class="fa fa-globe"></i>
