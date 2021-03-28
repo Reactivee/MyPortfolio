@@ -15,7 +15,9 @@ use yii\widgets\ActiveForm;
         <div class="col-sm-12">
 
             <div class="mb-5 text-center">
-                <h2 data-animate="fadeInUp" class="title">My work</h2>
+                <h2 data-animate="fadeInUp" class="title">
+                    <?= Yii::t('main', 'Loyihalarim') ?>
+                </h2>
                 <p data-animate="fadeInUp" class="lead">
                     I have worked on dozens of projects so I have picked only the
                     latest for you.

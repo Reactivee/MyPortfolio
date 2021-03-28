@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Yii;
 
 /**
  * This is the model class for table "feedback".
@@ -44,7 +45,7 @@ class Feedback extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'first_name' => 'First name',
+            'first_name' => Yii::t('main', 'Ism'),
             'last_name' => 'Last name',
             'email' => 'Email',
             'phone' => 'Phone',

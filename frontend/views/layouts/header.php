@@ -13,19 +13,7 @@
                   </ul>
               </div>
 
-              <div class="list-unstyled">
-                  <li class="dropdown list-unstyled ">
-                      <a class="dropdown-toggle" href="/uz" data-toggle="dropdown" role="button" aria-expanded="false">
-                          Oʻz
-<!--                          <span class="caret"></span>-->
-                      </a>
-                      <ul class="dropdown-menu list-unstyled border-0">
-                          <li><a href="/ru">Ру</a></li>
-                          <li><a href="/en">En</a></li>
-                      </ul>
-                  </li>
-              </div>
-
+              <?=\frontend\widgets\LanguagePicker::widget()?>
 
           </div>
       </nav>

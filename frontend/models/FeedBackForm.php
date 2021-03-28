@@ -10,6 +10,7 @@ namespace frontend\models;
 
 
 use common\models\Feedback;
+use Yii;
 
 class FeedBackForm extends Feedback
 {
@@ -23,7 +24,7 @@ class FeedBackForm extends Feedback
             [['first_name', 'last_name', 'email', 'message'], 'required'],
             [['message'], 'string'],
             ['captcha', 'captcha'],
-            ['email','email'],
+            ['email', 'email'],
             [['first_name', 'last_name', 'phone'], 'string', 'max' => 255],
             [
                 'fileHelper', 'file',
@@ -35,10 +36,14 @@ class FeedBackForm extends Feedback
             ]
         ];
     }
+
     public function attributeLabels()
     {
-        return [
-            'fileHelper'=>'File yuklash'
-        ];
+        return
+            parent::attributeLabels() +
+            [
+                'fileHelper' => Yii::t('main', 'File yuklash'),
+                'captcha' => Yii::t('main', 'Maxsus kod')
+            ];
     }
 }

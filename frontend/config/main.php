@@ -10,6 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'uz',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -40,12 +41,11 @@ return [
             'class' => 'codemix\localeurls\UrlManager',
             'enableDefaultLanguageUrlCode' => true,
             'enableLanguagePersistence' => false,
-            //'languages' => ['uz', 'ru'/*, 'en'*/],
+            'languages' => ['uz', 'ru', 'en'],
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableLanguageDetection' => false,
-
-        ]
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -54,6 +54,18 @@ return [
             ],
         ],
         */
+        'i18n' => [
+            'translations' => [
+                'main*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@frontend/messages',
+                    'sourceLanguage' => 'uz',
+                    'fileMap' => [
+                        'main' => 'main.php',
+                    ]
+                ]
+            ]
+        ]
     ],
     'params' => $params,
 ];
