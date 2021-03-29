@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\FeedbackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Feedbacks';
+$this->title = 'Feedbacks ' . ' Text';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="feedback-index">
