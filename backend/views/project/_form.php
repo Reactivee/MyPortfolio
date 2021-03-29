@@ -1,6 +1,7 @@
 <?php
 
 use kartik\select2\Select2;
+use yii\bootstrap\Tabs;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
@@ -13,87 +14,108 @@ use kartik\date\DatePicker;
 
 <div class="project-form">
 
+
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title_uz')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'title_ru')->textInput(['maxlength' => true]) ?>
+    <?
+    echo Tabs::widget([
+        'items' => [
+            [
+                'label' => 'UZ',
+                'content' => $form->field($model, 'title_uz')->textInput(['maxlength' => true]) . $form->field($model, 'description_uz')
+                        ->widget(\dosamigos\ckeditor\CKEditor::class, [
+                            'options' => [
+                                'id' => 'CK-desc_uz'
+                            ],
+                            'preset' => 'custom',
+                            'clientOptions' => [
+                                'height' => 400,
+                                'language' => 'en',
+                                'extraPlugins' => 'font,smiley,colorbutton,iframe,selectall,copyformatting,justify',
+                                'removeButtons' => 'About,Anchor,Styles,Font',
+                                "toolbarGroups" => [
+                                    ['name' => 'document', 'groups' => ['mode']],
+                                    ['name' => 'clipboard', 'groups' => ['undo', 'clipboard']],
+                                    ['name' => 'editing', 'groups' => ['find', 'selection', 'editing']],
+                                    ['name' => 'links', 'groups' => ['links']],
+                                    ['name' => 'insert', 'groups' => ['insert']],
+                                    ['name' => 'colors', 'groups' => ['colors']],
+                                    '/',
+                                    ['name' => 'basicstyles', 'groups' => ['basicstyles', 'cleanup']],
+                                    ['name' => 'paragraph', 'groups' => ['list', 'indent', 'blocks', 'align', 'paragraph']],
+                                    ['name' => 'styles', 'groups' => ['styles']]
+                                ],
+                                'toolbar' => [
+                                    ['name' => 'document', 'items' => ['Source']],
+                                    ['name' => 'clipboard', 'items' => ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord']],
+                                    ['name' => 'editing', 'items' => ['SelectAll']],
+                                    ['name' => 'links', 'items' => ['Link', 'Unlink']],
+                                    ['name' => 'insert', 'items' => ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe']],
+                                    ['name' => 'colors', 'items' => ['TextColor', 'BGColor']],
+                                    ['name' => 'tools', 'items' => ['Maximize']],
+                                    '/',
+                                    ['name' => 'basicstyles', 'items' => ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']],
+                                    ['name' => 'paragraph', 'items' => ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']],
+                                    ['name' => 'styles', 'items' => ['Format', 'FontSize']]
+                                ],
+                            ],
+                        ]),
+                'active' => true
+            ],
+            [
+                'label' => 'RU',
+                'content' => $form->field($model, 'title_ru')->textInput(['maxlength' => true]) . $form->field($model, 'description_ru')
+                        ->widget(\dosamigos\ckeditor\CKEditor::class, [
+                            'options' => [
+                                'id' => 'CK-desc_ru'
+                            ],
+                            'preset' => 'custom',
+                            'clientOptions' => [
+                                'height' => 400,
+                                'language' => 'en',
+                                'extraPlugins' => 'font,smiley,colorbutton,iframe,selectall,copyformatting,justify',
+                                'removeButtons' => 'About,Anchor,Styles,Font',
+                                "toolbarGroups" => [
+                                    ['name' => 'document', 'groups' => ['mode']],
+                                    ['name' => 'clipboard', 'groups' => ['undo', 'clipboard']],
+                                    ['name' => 'editing', 'groups' => ['find', 'selection', 'editing']],
+                                    ['name' => 'links', 'groups' => ['links']],
+                                    ['name' => 'insert', 'groups' => ['insert']],
+                                    ['name' => 'colors', 'groups' => ['colors']],
+                                    '/',
+                                    ['name' => 'basicstyles', 'groups' => ['basicstyles', 'cleanup']],
+                                    ['name' => 'paragraph', 'groups' => ['list', 'indent', 'blocks', 'align', 'paragraph']],
+                                    ['name' => 'styles', 'groups' => ['styles']]
+                                ],
+                                'toolbar' => [
+                                    ['name' => 'document', 'items' => ['Source']],
+                                    ['name' => 'clipboard', 'items' => ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord']],
+                                    ['name' => 'editing', 'items' => ['SelectAll']],
+                                    ['name' => 'links', 'items' => ['Link', 'Unlink']],
+                                    ['name' => 'insert', 'items' => ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe']],
+                                    ['name' => 'colors', 'items' => ['TextColor', 'BGColor']],
+                                    ['name' => 'tools', 'items' => ['Maximize']],
+                                    '/',
+                                    ['name' => 'basicstyles', 'items' => ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']],
+                                    ['name' => 'paragraph', 'items' => ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']],
+                                    ['name' => 'styles', 'items' => ['Format', 'FontSize']]
+                                ],
+                            ],
+                        ]),
+                'headerOptions' => [
+                    'ONE',
+                    'TWO'
+                ],
+                'options' => ['id' => 'myveryownID'],
+            ],
 
-    <?= $form->field($model, 'description_uz')
-    ->widget(\dosamigos\ckeditor\CKEditor::class, [
-        'options' => [
-            'id' => 'CK-desc_uz'
+
         ],
-        'preset' => 'custom',
-        'clientOptions' => [
-            'height' => 400,
-            'language' => 'en',
-            'extraPlugins' => 'font,smiley,colorbutton,iframe,selectall,copyformatting,justify',
-            'removeButtons' => 'About,Anchor,Styles,Font',
-            "toolbarGroups" => [
-                ['name' => 'document', 'groups' => ['mode']],
-                ['name' => 'clipboard', 'groups' => ['undo', 'clipboard']],
-                ['name' => 'editing', 'groups' => ['find', 'selection', 'editing']],
-                ['name' => 'links', 'groups' => ['links']],
-                ['name' => 'insert', 'groups' => ['insert']],
-                ['name' => 'colors', 'groups' => ['colors']],
-                '/',
-                ['name' => 'basicstyles', 'groups' => ['basicstyles', 'cleanup']],
-                ['name' => 'paragraph', 'groups' => ['list', 'indent', 'blocks', 'align', 'paragraph']],
-                ['name' => 'styles', 'groups' => ['styles']]
-            ],
-            'toolbar' => [
-                ['name' => 'document', 'items' => ['Source']],
-                ['name' => 'clipboard', 'items' => ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord']],
-                ['name' => 'editing', 'items' => ['SelectAll']],
-                ['name' => 'links', 'items' => ['Link', 'Unlink']],
-                ['name' => 'insert', 'items' => ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe']],
-                ['name' => 'colors', 'items' => ['TextColor', 'BGColor']],
-                ['name' => 'tools', 'items' => ['Maximize']],
-                '/',
-                ['name' => 'basicstyles', 'items' => ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']],
-                ['name' => 'paragraph', 'items' => ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']],
-                ['name' => 'styles', 'items' => ['Format', 'FontSize']]
-            ],
-        ],
-    ])?>
-    <?= $form->field($model, 'description_ru')
-        ->widget(\dosamigos\ckeditor\CKEditor::class, [
-            'options' => [
-                'id' => 'CK-desc_ru'
-            ],
-            'preset' => 'custom',
-            'clientOptions' => [
-                'height' => 400,
-                'language' => 'en',
-                'extraPlugins' => 'font,smiley,colorbutton,iframe,selectall,copyformatting,justify',
-                'removeButtons' => 'About,Anchor,Styles,Font',
-                "toolbarGroups" => [
-                    ['name' => 'document', 'groups' => ['mode']],
-                    ['name' => 'clipboard', 'groups' => ['undo', 'clipboard']],
-                    ['name' => 'editing', 'groups' => ['find', 'selection', 'editing']],
-                    ['name' => 'links', 'groups' => ['links']],
-                    ['name' => 'insert', 'groups' => ['insert']],
-                    ['name' => 'colors', 'groups' => ['colors']],
-                    '/',
-                    ['name' => 'basicstyles', 'groups' => ['basicstyles', 'cleanup']],
-                    ['name' => 'paragraph', 'groups' => ['list', 'indent', 'blocks', 'align', 'paragraph']],
-                    ['name' => 'styles', 'groups' => ['styles']]
-                ],
-                'toolbar' => [
-                    ['name' => 'document', 'items' => ['Source']],
-                    ['name' => 'clipboard', 'items' => ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord']],
-                    ['name' => 'editing', 'items' => ['SelectAll']],
-                    ['name' => 'links', 'items' => ['Link', 'Unlink']],
-                    ['name' => 'insert', 'items' => ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe']],
-                    ['name' => 'colors', 'items' => ['TextColor', 'BGColor']],
-                    ['name' => 'tools', 'items' => ['Maximize']],
-                    '/',
-                    ['name' => 'basicstyles', 'items' => ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']],
-                    ['name' => 'paragraph', 'items' => ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']],
-                    ['name' => 'styles', 'items' => ['Format', 'FontSize']]
-                ],
-            ],
-        ])?>
+    ]);
+    ?>
+
+
+
     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
     <? if ($model->image) {

@@ -14,11 +14,14 @@ echo __FILE__;
     <div class="container">
         <div class="col-sm-12">
 
-            <div class="mb-5 text-center">
+            <div class="my-5 text-center">
                 <h1>
                     hello world
-                </h1>
+
+                </h1
+
             </div>
         </div>
     </div>
+
 </section>
